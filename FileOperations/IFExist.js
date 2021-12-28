@@ -1,6 +1,6 @@
 const fs = require('fs');
 var path= require('path');
-const IfExist = (filename, password) => {
+const IfExist = (filename, GeneratedString, password) => {
     return new Promise((resolve, reject) => {
         var exists = false
         fs.readdir(
@@ -12,10 +12,11 @@ const IfExist = (filename, password) => {
                     console.log(file)
                     console.log(file.split('-'))
                     var ExistFileName = file.split('-')[0];
-                    var ExistFilePassWord = file.split('-')[1];
-                    if(ExistFileName === filename && ExistFilePassWord == password )
+                    var ExistRandomString = file.split('-')[1];
+                    var ExistFilePassWord = file.split('-')[2];
+                    if(ExistFileName === filename && ExistRandomString == GeneratedString && ExistFilePassWord == password )
                     {
-                        console.log("This file already Exist with this name ->",ExistFileName,ExistFilePassWord);
+                        console.log("This file already Exist with this name ->",ExistFileName, ExistRandomString, ExistFilePassWord);
                         exists = true
                     }
                 }
