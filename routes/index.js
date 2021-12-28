@@ -43,19 +43,27 @@ router.get('/dashboard/', async (req,res) =>{
   /* also we couldn't render using put method */
   var data = req.query;
   res.render('dashboard', data)
-  // var data = req.body.record
-  // var timer = new Date().getTime()
-  // var secret = { }
-  // secret[timer] = data;
-  // await AddData(secret);
 })
 
 /* endpoint for adding data into the file */
 
-router.post('/uploaddata', (req,res) => {
-  console.log("here is the datt ->",req.body)
-  res.render('dashboard')
-
+router.post('/uploaddata', async (req,res) => {
+  var data  =  JSON.parse(JSON.stringify(req.body))
+  var DataToInsert = {}
+  if(typeof(data.signinemail) === "string"){
+    console.log("string here",data.signinemail)
+    var randkey = Math.floor(Math.random() * 10000000000000000);
+    DataToInsert[randkey] = data.signinemail;
+    await AddData(DataToInsert);
+  }
+  else if(typeof(data.signinemail) === "object"){
+    data.signinemail.map(e => {
+      var randkey = Math.floor(Math.random() * 10000000000000000);
+      DataToInsert[randkey] = e;
+    })
+    await AddData(DataToInsert);
+  }
+  res.redirect('/dashboard')
 })
 
 module.exports = router;

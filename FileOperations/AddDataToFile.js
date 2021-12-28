@@ -13,26 +13,42 @@ const AddData = (data) =>{
                     console.log(file)
                     console.log(file.split('-'))
                     var ExistFileName = file.split('-')[0];
-                    var ExistFilePassWord = file.split('-')[1];
-                    if(ExistFileName === 'Muhammad Hamza' && ExistFilePassWord == '12345' )
+                    var ExistFilePassWord = file.split('-')[2];
+                    if(ExistFileName === 'muhammad afshal' && ExistFilePassWord == '1234' )
                     {
                         console.log("hye")
-                        fs.readFile(path.resolve(__dirname, '../UserFiles','Muhammad Hamza-12345-File.json'), 'utf-8', function(err, content) {
+                        fs.readFile(path.resolve(__dirname, '../UserFiles','muhammad afshal-uKqAhCfbTF-1234-File.json'), 'utf-8', function(err, content) {
                             if (err) {
                                 return;
                             }
                             else{
-                                console.log("inside->",content)
-                                var filedata = JSON.parse(content);
-                                console.log(filedata[0])
-                                filedata.push(data)
-                                console.log(filedata)
-                                fs.writeFile(path.join(__dirname,"../UserFiles",'Muhammad Hamza-12345-File.json'), JSON.stringify(filedata), err => {
-                                    if (err) {
-                                      console.error(err)
-                                      return
+                                if(content != ""){
+                                    console.log("inside->",content)
+                                    var filedata = JSON.parse(content);
+                                    console.log(filedata)
+                                    // filedata.push(data)
+                                    /* for adding values in already existing object */
+                                    for (const [key, value] of Object.entries(data)) {
+                                        filedata[key] = value
                                     }
-                                })
+                                    console.log(filedata)
+                                    fs.writeFile(path.join(__dirname,"../UserFiles",'muhammad afshal-uKqAhCfbTF-1234-File.json'), JSON.stringify(filedata), err => {
+                                        if (err) {
+                                          console.error(err)
+                                          return
+                                        }
+                                    })
+                                }
+                                else{
+                                    console.log("------------")
+                                    fs.appendFile(path.join(__dirname,"../UserFiles",'muhammad afshal-uKqAhCfbTF-1234-File.json'),JSON.stringify(data), 'utf8',
+                                    // callback function
+                                    function(err) {     
+                                        if (err) throw err;
+                                        // if no error
+                                        console.log("Data is appended to file successfully.")
+                                    });
+                                }
                             }
                           });
                         exists = true
