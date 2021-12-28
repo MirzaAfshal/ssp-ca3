@@ -5,7 +5,11 @@ var fs = require('fs');
 const querystring = require('querystring'); 
 const { IfExist } =  require('../FileOperations/IFExist')
 const { AddData } = require('../FileOperations/AddDataToFile')
+const { UpdateData } = require('../FileOperations/UpdateDataInFile')
+const { DeleteData } = require('../FileOperations/DeleteDataInFile')
 const { RandomString } = require('../FileOperations/GenerateRandomString')
+
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -64,6 +68,18 @@ router.post('/uploaddata', async (req,res) => {
     await AddData(DataToInsert);
   }
   res.redirect('/dashboard')
+})
+
+/* endpoint for update data into the file */
+router.put('/modifyrecord/:tag', async (req, res) =>{
+  console.log(req.params.tag, req.body)
+  var data = req.body;
+  if(req.params.tag === "delete"){
+    await DeleteData(data)
+  }
+  else{
+    await UpdateData(data)
+  }
 })
 
 module.exports = router;
