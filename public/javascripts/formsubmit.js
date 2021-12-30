@@ -4,7 +4,6 @@ const UpdateNodes = (e) =>{
     var RecordText= e.target.parentElement.children[0].value;
     var AcTion = e.target.name;
     var FirstChildText, SecondChildText;
-    console.log("hhhhhhhhbbbbbbbbbb");
     document.querySelectorAll(".app-header").forEach(e=>{
         FirstChildText = e.children[0].innerText ;
         SecondChildText = e.children[1].innerText ;
