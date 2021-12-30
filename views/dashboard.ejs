@@ -9,11 +9,14 @@
 	<style>
 		.submenu-link{cursor: pointer;}
 	</style>
-
+	<script src="../javascripts/formsubmit.js"></script>
 </head> 
 
 <body class="app">   	
-    <header class="app-header fixed-top">	   	            
+    <header class="app-header fixed-top" style="display: flex; justify-content: space-evenly;">
+		<h2 style="color: #15a362;">FileName: <%=data.Filename%></h2>
+		<h1 hidden><%=data.password%></h1>
+		 	            
         <div id="app-sidepanel" class="app-sidepanel sidepanel-hidden"> 
 	        <div id="sidepanel-drop" class="sidepanel-drop"></div>
 	        <div class="sidepanel-inner d-flex flex-column">
@@ -45,9 +48,8 @@
 					        <div id="submenu-1" class="collapse submenu submenu-1 show" data-bs-parent="#menu-accordion">
 						        <ul class="submenu-list list-unstyled">
 							        <li class="submenu-item"><a class="submenu-link active createfile">Create File</a></li>
-							        <li class="submenu-item"><a class="submenu-link modifyfile">Modify File</a></li>
-							        <li class="submenu-item"><a class="submenu-link viewrecords">View Records</a></li>
-							        
+							        <li class="submenu-item"><a class="submenu-link modifyfile" onclick="fetchdata()">Modify File</a></li>
+							        <li class="submenu-item"><a class="submenu-link viewrecords" onclick="DisplayData()">View Records</a></li>
 						        </ul>
 					        </div>
 					    </li><!--//nav-item-->
@@ -63,7 +65,7 @@
 	    <div class="app-content pt-3 p-md-3 p-lg-4">
 		    <div class="container-xl panel createfile-panel" style="justify-content: center;display: flex;">
 				<div style="width:75%;margin-top:80px;">
-					<form action="http://localhost:3000/uploaddata" method="post" class="auth-form login-form" style="padding: 10px;background-color: #fff;box-shadow: 1px 1px 5px #acacac;">
+					<form action="http://localhost:3000/uploaddata/<%=data.Filename +'-'+data.password%>" method="post" class="auth-form login-form" style="padding: 10px;background-color: #fff;box-shadow: 1px 1px 5px #acacac;">
 						<h3 style="margin-top:10px;margin-bottom:30px;font-weight: lighter;">Insert Data</h3>        
 						<div class="d-flex email mb-3">
 							<input id="signin-email" name="signinemail" type="text" class="form-control signin-email" placeholder="Text" required="required" />
@@ -77,59 +79,20 @@
 		    </div>
 			<div class="container-xl panel  modifyfile-panel" style="justify-content: center;display: none;">
 				<div style="width:75%;margin-top:80px;">
-					<form class="auth-form login-form" style="padding: 10px;background-color: #fff;box-shadow: 1px 1px 5px #acacac;">
-						<h3 style="margin-top:10px;margin-bottom:30px;font-weight: lighter;">Modify File</h3>        
-						<div class="d-flex email mb-3">
-							<input id="signin-email" name="signin-email" type="text" class="form-control signin-email" placeholder="Text" required="required" />
-							<button style="margin-left:5px !important" onclick="UpdateNodes(this)" class="btn app-btn-primary create-node-text theme-btn mx-auto">CREATE</button>
-							<button style="margin-left:5px !important" onclick="UpdateNodes(this)" class="btn text-white  btn-danger create-node-text theme-btn mx-auto">DELETE</button>
-						</div>
+					<form  class="auth-form login-form modify-form-conn" style="padding: 10px;background-color: #fff;box-shadow: 1px 1px 5px #acacac;">
+						        
+						<!-- <div class="d-flex email mb-3">
+							<input id="signin-email" name="signinemail" type="text" class="form-control signin-email" placeholder="Text" />
+							<button style="margin-left:5px !important" onclick="UpdateNodes()" class="btn app-btn-primary create-node-text theme-btn mx-auto" name="update">Update</button>
+							<button style="margin-left:5px !important" onclick="UpdateNodes()" class="btn text-white  btn-danger create-node-text theme-btn mx-auto" name="delete">DELETE</button>
+						</div> -->
 					</form>
 				</div>
 		    </div>
 			<div class="container-xl panel viewrecords-panel" style="justify-content: center; display: none;background-color: #fff;padding: 0px;">
-				<div style="height:500px;overflow: scroll;border: 1px solid #51b37f;">
-				<table class="table table-striped" cellspacing="0" width="100%" style="margin-bottom:0px;box-shadow: 1px 1px 5px #b0b0b0;">
-					<thead>
-					  <tr>
-						<th>Firstname</th>
-						<th>Lastname</th>
-						<th>Email</th>
-						<th>Firstname</th>
-						<th>Lastname</th>
-						<th>Email</th>
-						<th>Firstname</th>
-						<th>Lastname</th>
-						<th>Email</th>
-						<th>Firstname</th>
-						<th>Lastname</th>
-						<th>Email</th>
-						<th>Firstname</th>
-						<th>Lastname</th>
-						<th>Email</th>
-						<th>Firstname</th>
-						<th>Lastname</th>
-						<th>Email</th>
-						<th>Firstname</th>
-						<th>Lastname</th>
-						<th>Email</th>
-						<th>Firstname</th>
-						<th>Lastname</th>
-						<th>Email</th>
-					  </tr>
-					</thead>
-					<tbody>
-					  <tr>
-						<td>John</td>
-						<td>Doe</td>
-						<td>john@example.com</td>
-						<td>John</td>
-						<td>Doe</td>
-						<td>john@example.com</td>
-					  </tr>
-					  
-					</tbody>
-				  </table>
+				<div style="height:500px; text-align: center; padding: 15px; width: 100%; overflow: scroll; border: 1px solid #51b37f;">
+					<table class="table table-striped" cellspacing="0" width="100%" style="margin-bottom:0px;box-shadow: 1px 1px 5px #b0b0b0;">	
+					</table>
 				</div>
 		    </div>
 	    </div><!--//app-content-->
@@ -138,12 +101,12 @@
     <script src="../plugins/bootstrap/js/bootstrap.min.js"></script>  
 	<script>
 		function CreateNodeVal(selectedNode){
-      let el = selectedNode.parentElement.querySelector("input");
-      let el_val = el.value;
-      el.value="";
+			let el = selectedNode.parentElement.querySelector("input");
+			let el_val = el.value;
+			el.value="";
 			selectedNode.parentElement.parentElement.insertBefore(selectedNode.parentElement.cloneNode(true),selectedNode.parentElement.parentElement.lastElementChild)
 			selectedNode.remove()
-      el.value=el_val;
+			el.value=el_val;
 		}
 		document.querySelector(".createfile").addEventListener("click",(e)=>{
 			document.querySelectorAll(".panel").forEach((e)=>{e.style.display="none"})
@@ -156,7 +119,7 @@
 		document.querySelector(".viewrecords").addEventListener("click",(e)=>{
 			document.querySelectorAll(".panel").forEach((e)=>{e.style.display="none"})
 			document.getElementsByClassName("viewrecords-panel")[0].style.display="flex"
-		});
+		});	
 	</script>
     
     <!-- Page Specific JS -->
