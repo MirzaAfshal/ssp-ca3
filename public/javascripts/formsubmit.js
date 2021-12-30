@@ -42,7 +42,6 @@ const fetchdata = () =>{
     var form = document.querySelector(".modify-form-conn");
     form.innerHTML = ""
     var FirstChildText, SecondChildText;
-    console.log("hhhhhhhhhhhhhhhhhhhhhhhh");
     document.querySelectorAll(".app-header").forEach(e=>{
         FirstChildText = e.children[0].innerText ;
         SecondChildText = e.children[1].innerText ;
@@ -121,7 +120,6 @@ const DisplayData = () =>{
     table.innerHTML = "";
     var FirstChildText, SecondChildText;
 
-    console.log("hhhhhhhhhhhhhhhhhhhhhhhh");
     
     document.querySelectorAll(".app-header").forEach(e=>{
         FirstChildText = e.children[0].innerText ;
