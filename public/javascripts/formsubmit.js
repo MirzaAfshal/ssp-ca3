@@ -1,5 +1,5 @@
 const UpdateNodes = (e) =>{
-    console.log("Check it->",e.target.name,e, e.target.parentElement.children[0].id)
+    console.log("Check it->",e.target.name,e, e.target.parentElement)
     var RecordId= e.target.parentElement.children[0].id;
     var RecordText= e.target.parentElement.children[0].value;
     var AcTion = e.target.name;
@@ -30,7 +30,10 @@ const UpdateNodes = (e) =>{
     else{
         fetch("http://localhost:3000/modifyrecord/"+AcTion+"/"+FileName, requestOptions)
         .then(response => response.text())
-        .then(result => console.log(result))
+        .then(result => {
+            console.log(result)
+            e.target.parentElement.remove();
+        })
         .catch(error => console.log('error', error));
     }
     e.preventDefault();
