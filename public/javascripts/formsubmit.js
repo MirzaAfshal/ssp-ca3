@@ -8,7 +8,7 @@ const UpdateNodes = (e) =>{
         FirstChildText = e.children[0].innerText ;
         SecondChildText = e.children[1].innerText ;
         console.log(e.children[0].innerText,e.children[1].innerText,FirstChildText, SecondChildText);
-     })
+    })
     var FileName = FirstChildText.split(':')[1]+'-'+SecondChildText;
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
