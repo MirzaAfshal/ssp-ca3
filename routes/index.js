@@ -24,7 +24,35 @@ router.post('/uploadfilename', body('name').not().isEmpty().trim().escape(), bod
   
   
   var FileName = req.body.name.toLowerCase();
+  var SplitFileName =  FileName.split('-');
+  console.log(SplitFileName)
+
   var PassWord =  req.body.pass;
+  var SplitPassWord =  PassWord.split('-');
+  console.log(SplitPassWord)
+  if(SplitFileName.length > 1){
+    FileName = "";
+    for(var i = 0; i < SplitFileName.length; i++){
+      FileName= FileName+SplitFileName[i]
+    }
+  }
+  else{
+    FileName = "";
+    console.log("its running->",SplitFileName[0])
+    FileName= SplitFileName[0]
+  }
+  console.log(FileName)
+  if(SplitPassWord.length > 1){
+    PassWord =""
+    for(var i = 0; i < SplitPassWord.length; i++){
+      PassWord = PassWord + SplitPassWord[i]
+    }
+  }
+  else{
+    PassWord =""
+    PassWord = SplitPassWord[0]
+  }
+  console.log(PassWord)
   if(FileName === "" && PassWord === ""){
     console.log("Data is empty", FileName, PassWord)
   }
@@ -59,6 +87,7 @@ router.get('/dashboard/', async (req,res) =>{
 
 /* endpoint for adding data into the file */
 router.post('/uploaddata/:data', async (req,res) => {
+  console.log("upload 1st -----------------")
   var data  =  JSON.parse(JSON.stringify(req.body))
   var FileInfo = req.params.data;
   var FileName = FileInfo.split('-')[0]
