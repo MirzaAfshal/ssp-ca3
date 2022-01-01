@@ -13,10 +13,15 @@
 </head> 
 
 <body class="app">   	
-    <header class="app-header fixed-top" style="display: flex; justify-content: space-evenly;">
+    <header class="app-header fixed-top" style="display: flex; justify-content: space-between;align-items: center;padding: 0px 25px;">
+		<div class="col-auto">
+			<a id="sidepanel-toggler" class="sidepanel-toggler d-inline-block d-xl-none" href="#">
+				<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" role="img"><title>Menu</title><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg>
+			</a>
+		</div>
 		<h2 style="color: #15a362;">FileName: <%=data.Filename%></h2>
 		<h1 hidden><%=data.password%></h1>
-		 	            
+		
         <div id="app-sidepanel" class="app-sidepanel sidepanel-hidden"> 
 	        <div id="sidepanel-drop" class="sidepanel-drop"></div>
 	        <div class="sidepanel-inner d-flex flex-column">
@@ -61,43 +66,45 @@
 	    </div><!--//app-sidepanel-->
     </header><!--//app-header-->
     
-    <div class="app-wrapper">
-	    <div class="app-content pt-3 p-md-3 p-lg-4">
-		    <div class="container-xl panel createfile-panel" style="justify-content: center;display: flex;">
-				<div style="width:75%;margin-top:80px;">
-					<form action="http://localhost:3000/uploaddata/<%=data.Filename +'-'+data.password%>" method="post" class="auth-form login-form" style="padding: 10px;background-color: #fff;box-shadow: 1px 1px 5px #acacac;">
-						<h3 style="margin-top:10px;margin-bottom:30px;font-weight: lighter;">Insert Data</h3>        
-						<div class="d-flex email mb-3">
-							<input id="signin-email" name="signinemail" type="text" class="form-control signin-email" placeholder="Text" required="required" />
-							<button style="margin-left:5px !important" onclick="CreateNodeVal(this)" class="btn app-btn-primary create-node-text theme-btn mx-auto">CREATE</button>
-						</div>
-						<div>
-							<button type="submit" style="height: 45px;font-size: 16px;font-weight: normal;background-color: #000;" class="btn app-btn-primary w-100 theme-btn mx-auto">Submit</button>
-						</div>
-					</form>
+    <div class="Content-containner">
+		<div class="app-wrapper">
+			<div class="app-content pt-3 p-md-3 p-lg-4">
+				<div class="container-xl panel createfile-panel" style="justify-content: center;display: flex;">
+					<div style="width:75%;margin-top:80px;">
+						<form action="http://localhost:3000/uploaddata/<%=data.Filename +'-'+data.password%>" method="post" class="auth-form login-form" style="padding: 10px;background-color: #fff;box-shadow: 1px 1px 5px #acacac;">
+							<h3 style="margin-top:10px;margin-bottom:30px;font-weight: lighter;">Insert Data</h3>        
+							<div class="d-flex email mb-3">
+								<input id="signin-email" name="signinemail" type="text" class="form-control signin-email" placeholder="Text" required="required" />
+								<button style="margin-left:5px !important" onclick="CreateNodeVal(this)" class="btn app-btn-primary create-node-text theme-btn mx-auto">CREATE</button>
+							</div>
+							<div>
+								<button type="submit" style="height: 45px;font-size: 16px;font-weight: normal;background-color: #000;" class="btn app-btn-primary w-100 theme-btn mx-auto">Submit</button>
+							</div>
+						</form>
+					</div>
 				</div>
-		    </div>
-			<div class="container-xl panel  modifyfile-panel" style="justify-content: center;display: none;">
-				<div style="width:75%;margin-top:80px;">
-					<form  class="auth-form login-form modify-form-conn" style="padding: 10px;background-color: #fff;box-shadow: 1px 1px 5px #acacac;">
-						        
-						<!-- <div class="d-flex email mb-3">
-							<input id="signin-email" name="signinemail" type="text" class="form-control signin-email" placeholder="Text" />
-							<button style="margin-left:5px !important" onclick="UpdateNodes()" class="btn app-btn-primary create-node-text theme-btn mx-auto" name="update">Update</button>
-							<button style="margin-left:5px !important" onclick="UpdateNodes()" class="btn text-white  btn-danger create-node-text theme-btn mx-auto" name="delete">DELETE</button>
-						</div> -->
-					</form>
+				<div class="container-xl panel  modifyfile-panel" style="justify-content: center;display: none;">
+					<div style="width:75%;margin-top:80px;">
+						<form  class="auth-form login-form modify-form-conn" style="padding: 10px;background-color: #fff;box-shadow: 1px 1px 5px #acacac;">
+									
+							<!-- <div class="d-flex email mb-3">
+								<input id="signin-email" name="signinemail" type="text" class="form-control signin-email" placeholder="Text" />
+								<button style="margin-left:5px !important" onclick="UpdateNodes()" class="btn app-btn-primary create-node-text theme-btn mx-auto" name="update">Update</button>
+								<button style="margin-left:5px !important" onclick="UpdateNodes()" class="btn text-white  btn-danger create-node-text theme-btn mx-auto" name="delete">DELETE</button>
+							</div> -->
+						</form>
+					</div>
 				</div>
-		    </div>
-			<div class="container-xl panel viewrecords-panel" style="justify-content: center; display: none;background-color: #fff;padding: 0px;">
-				<div style="height:500px; text-align: center; padding: 15px; width: 100%; overflow: scroll; border: 1px solid #51b37f;">
-					<table class="table table-striped" cellspacing="0" width="100%" style="margin-bottom:0px;box-shadow: 1px 1px 5px #b0b0b0;">	
-					</table>
+				<div class="container-xl panel viewrecords-panel" style="justify-content: center; display: none;background-color: #fff;padding: 0px;">
+					<div style="height:500px; text-align: center; padding: 15px; width: 100%; overflow: scroll; border: 1px solid #51b37f;">
+						<table class="table table-striped" cellspacing="0" width="100%" style="margin-bottom:0px;box-shadow: 1px 1px 5px #b0b0b0;">	
+						</table>
+					</div>
 				</div>
-		    </div>
-	    </div><!--//app-content-->
-    </div><!--//app-wrapper-->    					
-    <script src="../plugins/popper.min.js"></script>
+			</div><!--//app-content-->
+		</div>
+	</div>
+
     <script src="../plugins/bootstrap/js/bootstrap.min.js"></script>  
 	<script>
 		function CreateNodeVal(selectedNode){
@@ -121,9 +128,9 @@
 			document.getElementsByClassName("viewrecords-panel")[0].style.display="flex"
 		});	
 	</script>
-    
     <!-- Page Specific JS -->
     <script src="../javascripts/app.js"></script> 
+	<script src="../javascripts/popper.min.js"></script>
 
 </body>
 </html> 

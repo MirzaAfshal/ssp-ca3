@@ -5,8 +5,8 @@ const UpdateNodes = (e) =>{
     var AcTion = e.target.name;
     var FirstChildText, SecondChildText;
     document.querySelectorAll(".app-header").forEach(e=>{
-        FirstChildText = e.children[0].innerText ;
-        SecondChildText = e.children[1].innerText ;
+        FirstChildText = e.children[1].innerText ;
+        SecondChildText = e.children[2].innerText ;
         console.log(e.children[0].innerText,e.children[1].innerText,FirstChildText, SecondChildText);
     })
     var FileName = FirstChildText.split(':')[1]+'-'+SecondChildText;
@@ -41,13 +41,14 @@ const UpdateNodes = (e) =>{
 
 const fetchdata = () =>{
     /* remove elements */
+    console.log("hhhhhhhhhhhhhhhhhh")
     var form = document.querySelector(".modify-form-conn");
     form.innerHTML = ""
     var FirstChildText, SecondChildText;
     document.querySelectorAll(".app-header").forEach(e=>{
-        FirstChildText = e.children[0].innerText ;
-        SecondChildText = e.children[1].innerText ;
-        console.log(e.children[0].innerText,e.children[1].innerText,FirstChildText, SecondChildText);
+        FirstChildText = e.children[1].innerText ;
+        SecondChildText = e.children[2].innerText ;
+        console.log("inside function",e.children[0].innerText,e.children[1].innerText,FirstChildText, SecondChildText);
     })
     var FileName = FirstChildText.split(':')[1]+'-'+SecondChildText;
     console.log(typeof(FirstChildText), FileName)
@@ -124,8 +125,8 @@ const DisplayData = () =>{
 
     
     document.querySelectorAll(".app-header").forEach(e=>{
-        FirstChildText = e.children[0].innerText ;
-        SecondChildText = e.children[1].innerText ;
+        FirstChildText = e.children[1].innerText ;
+        SecondChildText = e.children[2].innerText ;
         console.log(e.children[0].innerText,e.children[1].innerText,FirstChildText, SecondChildText);
     })
     var FileName = FirstChildText.split(':')[1]+'-'+SecondChildText;
